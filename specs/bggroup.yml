@@ -1,0 +1,49 @@
+info:
+  description: bggroup client access
+  title: bggroup
+  version: 0.3.0
+
+basePath: /api/v1
+
+securityDefinitions:
+  key:
+    type: apiKey
+    in: header
+    name: x-token
+
+paths:
+  /register:
+    post:
+      tags:
+        - account
+      operationId: register
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: "#/definitions/registerRequest"
+      responses:
+        200:
+          description: account created
+        404:
+          description: request not found
+        500:
+          description: internal server error
+
+definitions:
+
+  registerRequest:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+
+produces:
+- application/zrok.v1+json
+consumes:
+- application/zrok.v1+json
+schemes:
+- http
+swagger: "2.0"
